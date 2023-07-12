@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+        <html lang="jp">
+        
+        <head>
+            <meta charset="UTF-8">
+            <meta http-equiv="X-UA-Compatible" content="IE=edge">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <link rel="stylesheet" href="static/css/home.css">
+            <title>明石高専学生食堂システム</title>
+            <script src="https://kit.fontawesome.com/24be36741f.js" crossorigin="anonymous"></script>
+        </head>
+        
+        <body>
+            <div class="loginbutton"><a href="login.html">ログイン</a></div>
+            <div class="pageinfo">
+                メニューの価格や写真を見ることができます。学籍番号でログインすることで、メニューの売り切れ状況、口コミ、カロリーを見ることもできます。
+            </div>
+            <div class="menutype">常設メニュー</div>
+            <div class="alldishes">
+                {% for info in menus %}
+                    <div class="narrowdishcolumn">
+                        <div class="dishinfo">
+                            <img class="dishthumb" src="static/images/{{info.img}}">
+                            <p class="dishtext">{{ info.name }}</p>
+                            <p class="basicinfo"><i class="fa-solid fa-coins"></i>{{info.price}}円</p>
+                            {% if info.out_of %}
+                                <p class="basicinfo canorder"><i class="fa-regular fa-circle"></i></i>注文可能</p>
+                            {% else %}
+                                <p class="basicinfo soldout"><i class="fa-solid fa-circle-xmark"></i></i>売り切れ</p>
+                            {% endif %}
+                            
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="menutype">A定食</div>
+            <div class="alldishes">
+                <div class="widedishcolumn">
+                    <div class="dishinfo">
+                        <p class="dishtext">{{ a.name }}</p>
+                        <p class="basicinfo"><i class="fa-solid fa-coins"></i>{{a.price}}円</p>
+                        {% if a.out_of %}
+                            <p class="basicinfo canorder"><i class="fa-regular fa-circle"></i></i>注文可能</p>
+                        {% else %}
+                            <p class="basicinfo soldout"><i class="fa-solid fa-circle-xmark"></i></i>売り切れ</p>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="menutype">B定食</div>
+            <div class="alldishes">
+                <div class="widedishcolumn">
+                    <div class="dishinfo">
+                        <p class="dishtext">{{ b.name }}</p>
+                        <p class="basicinfo"><i class="fa-solid fa-coins"></i>{{b.price}}円</p>
+                        {% if b.out_of %}
+                            <p class="basicinfo canorder"><i class="fa-regular fa-circle"></i></i>注文可能</p>
+                        {% else %}
+                            <p class="basicinfo soldout"><i class="fa-solid fa-circle-xmark"></i></i>売り切れ</p>
+                        {% endif %}
+                        
+                    </div>
+                </div>
+            </div>
+        
+        </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="jp">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="static/css/home.css">
+    <title>明石高専学生食堂システム</title>
+    <script src="https://kit.fontawesome.com/24be36741f.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div class="pagetop"><a href="#"><i class="fa-regular fa-circle-up"></i></a></div>
+    <form action="/detail" method="POST">
+        <details>
+            <summary>
+                <div class="menutype">常設メニュー<div class="opener"><i class="fa-solid fa-angle-down"></i></div>
+                </div>
+            </summary>
+
+            <div class="alldishes">
+                {% for info in menus %}
+                <div class="widedishcolumn">
+                    <div class="dishinfo">
+                        <img class="widedishthumb" src="static/images/{{info.img}}">
+                        <p class="dishtext">{{ info.name }}</p>
+                        <p class="basicinfo"><i class="fa-solid fa-coins"
+                                style="color:rgb(170, 170, 0)"></i>{{info.price}}円
+                        </p>
+                        <p class="basicinfo"><i class="fa-solid fa-bowl-food"
+                                style="color:rgb(200, 150, 0)"></i>{{info.cal}}kcal</p>
+                        {% if info.out_of %}
+                        <p class="basicinfo canorder"><i class="fa-regular fa-circle"></i></i>注文可能</p>
+                        {% else %}
+                        <p class="basicinfo soldout"><i class="fa-solid fa-circle-xmark"></i></i>売り切れ</p>
+                        {% endif %}
+                        <!--<input type="image" src="static/images/ooo_img.png" name="ooo" value="{{ info.id }}">-->
+                        <input type="hidden" name="pid" value="{{ info.id }}">
+                        <input type="submit" name="ooo" value="売り切れ状態の変更">
+                        <div class="comment_title"><i class="fa-solid fa-bullhorn"></i>口コミ</div>
+                        <textarea name="comment" cols="30" rows="3"></textarea>
+                        <input type="submit" value="書き込む">
+
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </details>
+        <div class="menutype">A定食</div>
+        <div class="alldishes">
+            <div class="widedishcolumn">
+                <div class="dishinfo">
+                    <p class="dishtext">{{ a.name }}</p>
+                    <p class="basicinfo"><i class="fa-solid fa-coins"></i>{{a.price}}円</p>
+                    <p class="basicinfo"><i class="fa-solid fa-bowl-food"></i>{{a.cal}}kcal</p>
+                    {% if a.out_of %}
+                    <p class="basicinfo canorder"><i class="fa-regular fa-circle"></i></i>注文可能</p>
+                    {% else %}
+                    <p class="basicinfo soldout"><i class="fa-solid fa-circle-xmark"></i></i>売り切れ</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+        <div class="menutype">B定食</div>
+        <div class="alldishes">
+            <div class="widedishcolumn">
+                <div class="dishinfo">
+                    <p class="dishtext">{{ b.name }}</p>
+                    <p class="basicinfo"><i class="fa-solid fa-coins"></i>{{b.price}}円</p>
+                    <p class="basicinfo"><i class="fa-solid fa-bowl-food"></i>{{b.cal}}kcal</p>
+                    {% if b.out_of %}
+                    <p class="basicinfo canorder"><i class="fa-regular fa-circle"></i></i>注文可能</p>
+                    {% else %}
+                    <p class="basicinfo soldout"><i class="fa-solid fa-circle-xmark"></i></i>売り切れ</p>
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+</body>
+
+</html>

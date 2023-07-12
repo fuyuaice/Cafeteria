@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>
+    {% block title %}{% endblock %} | 明石高専食堂管理システム
+  </title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}  "></script>
+</head>
+
+<body>
+  <header>
+    <!-- ヘッダーはここに記述 -->
+    <div align="center">明石高専学生食堂システム</div>
+  </header>
+  <div id="wrapper">
+    <dl>
+      <dt class="accordion">MENU</dt>
+      <dd>
+        <a href="/">メニュー</a>
+        <a href="/login">ログイン</a>
+        <a href="/signup">新規登録</a>
+        <a href="/diteil">マイページ</a>
+      </dd>
+    </dl>
+  </div>
+
+  <main>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="flash">
+      {% for message in messages %}
+      <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <h2 class='pagetitle'>{{ self.title() }}</h2>
+    {% block main %}
+    {% endblock %}
+
+  </main>
+</body>
+
+</html>
